@@ -268,45 +268,34 @@ async function loadSNP(range = currentSnpRange) {
   loadingEl.textContent = '불러오는 중...';
   loadingEl.classList.remove('hidden');
 
-  const intervalMap = { '5d': '1d', '1mo': '1d', '3mo': '1wk', '1y': '1wk' };
-  const interval = intervalMap[range] || '1d';
-  const yahooUrl = `https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?interval=${interval}&range=${range}`;
-
-  async function tryFetch(url) {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error('fetch failed');
-    return res.json();
-  }
-
   try {
-    let data;
-    try {
-      data = await tryFetch(yahooUrl);
-    } catch {
-      data = await tryFetch(`https://corsproxy.io/?${encodeURIComponent(yahooUrl)}`);
-    }
-    const result = data.chart.result[0];
-    const meta = result.meta;
-    const closes = result.indicators.quote[0].close;
-    const timestamps = result.timestamp;
+    const res = await fetch('./snp500.json');
+    if (!res.ok) throw new Error('not found');
+    const data = await res.json();
 
-    const labels = timestamps.map(ts => {
-      const d = new Date(ts * 1000);
-      return range === '1y' || range === '3mo'
+    const rangeDays = { '5d': 5, '1mo': 30, '3mo': 90, '1y': 365 };
+    const days = rangeDays[range] || 30;
+    const cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - days);
+
+    const filtered = data.history.filter(h => new Date(h.date) >= cutoff);
+    const labels = filtered.map(h => {
+      const d = new Date(h.date + 'T00:00:00');
+      return days > 60
         ? d.toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' })
         : d.toLocaleDateString('ko-KR', { month: 'numeric', day: 'numeric' });
     });
-    const values = closes.map(v => v ? parseFloat(v.toFixed(2)) : null);
+    const values = filtered.map(h => h.close);
 
-    const price = meta.regularMarketPrice;
-    const prevClose = meta.previousClose || meta.chartPreviousClose;
+    const price = data.price;
+    const prevClose = data.prevClose;
     const change = price - prevClose;
     const changePct = (change / prevClose) * 100;
     const isUp = change >= 0;
 
-    const priceEl = document.getElementById('snp-price');
+    document.getElementById('snp-price').textContent =
+      price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     const changeEl = document.getElementById('snp-change');
-    priceEl.textContent = price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     changeEl.textContent = `${isUp ? '+' : ''}${change.toFixed(2)} (${isUp ? '+' : ''}${changePct.toFixed(2)}%)`;
     changeEl.className = `snp-change ${isUp ? 'up' : 'down'}`;
 
