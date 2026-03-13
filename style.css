@@ -149,6 +149,51 @@ header h1 {
   background: #fef08a;
 }
 
+/* S&P 500 Card */
+.snp-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 1.5rem;
+}
+
+.snp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.snp-title-group h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.3rem;
+}
+
+.snp-info {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.snp-price {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #2d3748;
+}
+
+.snp-change {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.snp-change.up { color: #38a169; }
+.snp-change.down { color: #e53e3e; }
+
 /* Bottom Grid */
 .bottom-grid {
   display: grid;
