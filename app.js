@@ -270,7 +270,8 @@ async function loadSNP(range = currentSnpRange) {
 
   const intervalMap = { '5d': '1d', '1mo': '1d', '3mo': '1wk', '1y': '1wk' };
   const interval = intervalMap[range] || '1d';
-  const url = `https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?interval=${interval}&range=${range}`;
+  const yahooUrl = `https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?interval=${interval}&range=${range}`;
+  const url = `https://api.allorigins.win/raw?url=${encodeURIComponent(yahooUrl)}`;
 
   try {
     const res = await fetch(url);
