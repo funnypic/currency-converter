@@ -1,0 +1,316 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: #f0f4f8;
+  color: #1a202c;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2d3748;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  color: #718096;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+/* Converter Card */
+.converter-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 1.5rem;
+}
+
+.converter-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.currency-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.currency-group select {
+  padding: 0.6rem 0.75rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: #f7fafc;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.currency-group select:focus {
+  border-color: #4299e1;
+}
+
+.currency-group input[type="number"] {
+  padding: 0.75rem 1rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+
+.currency-group input[type="number"]:focus {
+  border-color: #4299e1;
+}
+
+.result-display {
+  padding: 0.75rem 1rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2b6cb0;
+  background: #ebf8ff;
+  min-height: 3.1rem;
+  display: flex;
+  align-items: center;
+}
+
+#swap-btn {
+  background: #4299e1;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-bottom: 2px;
+  transition: background 0.2s, transform 0.1s;
+}
+
+#swap-btn:hover {
+  background: #3182ce;
+  transform: scale(1.08);
+}
+
+.rate-info {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+#rate-text {
+  font-size: 0.9rem;
+  color: #718096;
+}
+
+.btn-sm {
+  background: #fefcbf;
+  color: #744210;
+  border: 1.5px solid #f6e05e;
+  border-radius: 8px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-sm:hover {
+  background: #fef08a;
+}
+
+/* Bottom Grid */
+.bottom-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+}
+
+/* Chart Card */
+.chart-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chart-header h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.period-tabs {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.tab {
+  padding: 0.3rem 0.7rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 6px;
+  background: white;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab.active {
+  background: #4299e1;
+  color: white;
+  border-color: #4299e1;
+}
+
+.tab:hover:not(.active) {
+  background: #ebf8ff;
+  border-color: #90cdf4;
+}
+
+.chart-wrapper {
+  position: relative;
+  height: 220px;
+}
+
+#rate-chart {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.chart-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.85);
+  font-size: 0.9rem;
+  color: #718096;
+  border-radius: 8px;
+}
+
+.chart-overlay.hidden {
+  display: none;
+}
+
+/* Favorites Card */
+.favorites-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.favorites-card h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 1rem;
+}
+
+#favorites-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.empty-msg {
+  font-size: 0.85rem;
+  color: #a0aec0;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.fav-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0.75rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.fav-item:hover {
+  background: #ebf8ff;
+  border-color: #90cdf4;
+}
+
+.fav-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.fav-delete {
+  background: none;
+  border: none;
+  color: #fc8181;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0 0.2rem;
+  line-height: 1;
+}
+
+.fav-delete:hover {
+  color: #e53e3e;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .converter-row {
+    flex-direction: column;
+  }
+
+  #swap-btn {
+    align-self: center;
+    transform: rotate(90deg);
+  }
+
+  #swap-btn:hover {
+    transform: rotate(90deg) scale(1.08);
+  }
+
+  .bottom-grid {
+    grid-template-columns: 1fr;
+  }
+}

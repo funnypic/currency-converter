@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>환율 변환기</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>환율 변환기</h1>
+      <span id="last-updated" class="subtitle">환율 불러오는 중...</span>
+    </header>
+
+    <!-- 변환 카드 -->
+    <section class="converter-card">
+      <div class="converter-row">
+        <div class="currency-group">
+          <select id="from-currency"></select>
+          <input type="number" id="from-amount" value="1" min="0" step="any" />
+        </div>
+        <button id="swap-btn" title="통화 교환">⇄</button>
+        <div class="currency-group">
+          <select id="to-currency"></select>
+          <div id="to-amount" class="result-display">-</div>
+        </div>
+      </div>
+      <div class="rate-info">
+        <span id="rate-text"></span>
+        <button id="add-favorite-btn" class="btn-sm">★ 즐겨찾기 추가</button>
+      </div>
+    </section>
+
+    <div class="bottom-grid">
+      <!-- 차트 -->
+      <section class="chart-card">
+        <div class="chart-header">
+          <h2 id="chart-title">환율 추이</h2>
+          <div class="period-tabs">
+            <button class="tab active" data-period="7">1주</button>
+            <button class="tab" data-period="30">1달</button>
+            <button class="tab" data-period="90">3달</button>
+            <button class="tab" data-period="365">1년</button>
+          </div>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="rate-chart"></canvas>
+          <div id="chart-loading" class="chart-overlay">불러오는 중...</div>
+        </div>
+      </section>
+
+      <!-- 즐겨찾기 -->
+      <section class="favorites-card">
+        <h2>즐겨찾기</h2>
+        <ul id="favorites-list">
+          <li class="empty-msg">즐겨찾기가 없습니다.</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
